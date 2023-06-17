@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingFormatWidthException;
 import java.util.Scanner;
 
 public class PlantManager {
@@ -24,7 +25,7 @@ public class PlantManager {
                 // System.out.println(linePM);
                 // Oddělení jednotlivých dat stažených ze souboru (teď máme tabulátor, kterej se mi vůbec nelíbí)
                 String[] itemsPM = linePM.split(delimiterPM);
-                    if (itemsPM.length < 5) {try {} catch (NumberFormatException e) {
+                    if (itemsPM.length < 5) {try {} catch (IllegalArgumentException e) {
                             System.out.println("Chyba - na řádku v databázi není dostatečný počet položek. "
                                     + e.getLocalizedMessage());
                         }
