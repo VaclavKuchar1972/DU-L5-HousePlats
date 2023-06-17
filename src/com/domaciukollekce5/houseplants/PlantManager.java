@@ -13,13 +13,18 @@ public class PlantManager {
 
     private List<Plant> plantListPM = new ArrayList<>();
 
-    // To samý PROČ? Jeko níže
+    // To samý PROČ? Jako níže
+    public void loadDataPlantsFromFilePM (String fileNamePM) throws PlantException {
+        try (Scanner scannerLoadDataPM = new Scanner(new BufferedReader(new FileReader(fileNamePM)))) {
+            while (scannerLoadDataPM.hasNextLine()) {
+                String linePM = scannerLoadDataPM.nextLine();
+                System.out.println(linePM);
 
 
-    public void loadDataPlatsFromFilePM (String fileName) {
-        try (Scanner loadDataPM = new Scanner(new BufferedReader(new FileReader(fileName)))) {
+            }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+
+            throw new PlantException("Soubor " + fileNamePM + "nebyl nalezen! " + e.getLocalizedMessage());
         }
 
 
