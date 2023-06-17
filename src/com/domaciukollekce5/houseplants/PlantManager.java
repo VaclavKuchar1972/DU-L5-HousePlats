@@ -25,26 +25,24 @@ public class PlantManager {
                 // System.out.println(linePM);
                 // Oddělení jednotlivých dat stažených ze souboru (teď máme tabulátor, kterej se mi vůbec nelíbí)
                 String[] itemsPM = linePM.split(delimiterPM);
-                    if (itemsPM.length < 5) {try {} catch (IllegalArgumentException e) {
-                            System.out.println("Chyba - na řádku v databázi není dostatečný počet položek. "
-                                    + e.getLocalizedMessage());
-                        }
-                    }
+                if (itemsPM.length < 5) {
+                    throw new PlantException("Chyba - na řádku v databázi není dostatečný počet položek. ");
+                }
                 plantNamePM = itemsPM[0]; plantNotePM = itemsPM[1];
                 try {
                     normalWateringFrequencyPM = Integer.parseInt(itemsPM[2]);
                 } catch (NumberFormatException e) {
-                    System.out.println("Chyba - v databázi není číslo. " + e.getLocalizedMessage());
+                    new PlantException("Chyba - v databázi není číslo: " + itemsPM[2]);
                 }
                 try {
                     plantLastWateringDatePM = LocalDate.parse(itemsPM[3]);
                 } catch (NumberFormatException e) {
-                    System.out.println("Chyba - v databázi není datum. " + e.getLocalizedMessage());
+                    new PlantException("Chyba - v databázi není datum: " + itemsPM[3]);
                 }
                 try {
                     plantPlantingDatePM = LocalDate.parse(itemsPM[4]);
                 } catch (NumberFormatException e) {
-                    System.out.println("Chyba - v databázi není datum. " + e.getLocalizedMessage());
+                    new PlantException("Chyba - v databázi není datum: " + itemsPM[4]);
                 }
                 Plant newPlantPM = new Plant(plantNamePM, plantNotePM, plantPlantingDatePM, plantLastWateringDatePM,
                         normalWateringFrequencyPM);
@@ -74,3 +72,9 @@ public class PlantManager {
 
 
 }
+
+//    if (itemsPM.length < 5) {try {} catch (IllegalArgumentException e) {
+//            System.out.println("Chyba - na řádku v databázi není dostatečný počet položek. "
+//                   + e.getLocalizedMessage());
+//       }
+//   }
