@@ -26,23 +26,24 @@ public class PlantManager {
                 // Oddělení jednotlivých dat stažených ze souboru (teď máme tabulátor, kterej se mi vůbec nelíbí)
                 String[] itemsPM = linePM.split(delimiterPM);
                 if (itemsPM.length < 5) {
-                    throw new PlantException("Chyba - na řádku v databázi není dostatečný počet položek. ");
+                    throw new PlantException(
+                            "Chyba - na řádku v databázi není dostatečný počet položek na řádku: " + linePM);
                 }
                 plantNamePM = itemsPM[0]; plantNotePM = itemsPM[1];
                 try {
                     normalWateringFrequencyPM = Integer.parseInt(itemsPM[2]);
                 } catch (NumberFormatException e) {
-                    new PlantException("Chyba - v databázi není číslo: " + itemsPM[2]);
+                    new PlantException("Chyba - v databázi není číslo: " + itemsPM[2] + "nařádku: " + linePM);
                 }
                 try {
                     plantLastWateringDatePM = LocalDate.parse(itemsPM[3]);
                 } catch (NumberFormatException e) {
-                    new PlantException("Chyba - v databázi není datum: " + itemsPM[3]);
+                    new PlantException("Chyba - v databázi není datum: " + itemsPM[3] + "nařádku: " + linePM);
                 }
                 try {
                     plantPlantingDatePM = LocalDate.parse(itemsPM[4]);
                 } catch (NumberFormatException e) {
-                    new PlantException("Chyba - v databázi není datum: " + itemsPM[4]);
+                    new PlantException("Chyba - v databázi není datum: " + itemsPM[4] + "nařádku: " + linePM);
                 }
                 Plant newPlantPM = new Plant(plantNamePM, plantNotePM, plantPlantingDatePM, plantLastWateringDatePM,
                         normalWateringFrequencyPM);
