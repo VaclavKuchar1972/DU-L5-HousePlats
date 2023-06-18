@@ -47,8 +47,9 @@ public class HousePlants {
         System.out.println("Aktualizovaný seznam rostlin po přidání dvou rostlin dle zadání domácího úkolu v bodě 14:");
         for (Plant plant : plantListPM) {
             System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
-                    + plant.getPlantNormalWateringFrequencyP() + "\t" + plant.getPlantLastWateringDateP() + "\t"
-                    + plant.getPlantPlantingDateP());
+                    + plant.getPlantNormalWateringFrequencyP() + "\t"
+                    + plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")) + "\t"
+                    + plant.getPlantPlantingDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
         }
 
         plantListPM.removeIf(plant -> plant.getPlantNameP().equals("Sukulent v koupelně"));
@@ -57,10 +58,11 @@ public class HousePlants {
                 ("Aktualizovaný seznam rostlin po odebrání jedné rostliny dle zadání domácího úkolu v bodě 14:");
         for (Plant plant : plantListPM) {
             System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
-                    + plant.getPlantNormalWateringFrequencyP() + "\t" + plant.getPlantLastWateringDateP() + "\t"
-                    + plant.getPlantPlantingDateP());
+                    + plant.getPlantNormalWateringFrequencyP() + "\t"
+                    + plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")) + "\t"
+                    + plant.getPlantPlantingDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
         }
-
-
     }
+
+
 }
