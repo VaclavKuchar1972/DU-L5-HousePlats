@@ -9,16 +9,16 @@ public class Plant {
     private String plantNoteP = "";
     private LocalDate plantPlantingDateP;
     private LocalDate plantLastWateringDateP;
-    private int normalWateringFrequencyP;
+    private int plantNormalWateringFrequencyP;
 
     // Konstruktor 1 - se všemi adtibuty
     public Plant(String plantNameP, String plantNoteP, LocalDate plantPlantingDateP, LocalDate plantLastWateringDateP,
-                 int normalWateringFrequencyP) {
+                 int plantNormalWateringFrequencyP) {
         this.plantNameP = plantNameP;
         this.plantNoteP = plantNoteP;
         this.plantPlantingDateP = plantPlantingDateP;
         this.plantLastWateringDateP = plantLastWateringDateP;
-        this.normalWateringFrequencyP = normalWateringFrequencyP;
+        this.plantNormalWateringFrequencyP = plantNormalWateringFrequencyP;
     }
     // Konstruktor 2 - "plantNoteP" nastaví jako prázdný řetězec a "plantLastWateringDateP" nastaví jako aktuální datum
     public Plant(String plantNoteP, LocalDate plantLastWateringDateP) {
@@ -28,11 +28,11 @@ public class Plant {
     // Konstruktor 3 - "plantNoteP" nastaví jako prázdný řetězec, "plantLastWateringDateP" nastaví jako aktuální datum,
     // "normalWateringFrequencyP" nastaví na hodnotu 7 a "plantPlantingDateP" nastaví jako aktuální datum
     public Plant(String plantNoteP, LocalDate plantPlantingDateP, LocalDate plantLastWateringDateP,
-                 int normalWateringFrequencyP) {
+                 int plantNormalWateringFrequencyP) {
         this.plantNoteP = plantNoteP;
         this.plantPlantingDateP = LocalDate.now();
         this.plantLastWateringDateP = LocalDate.now();
-        this.normalWateringFrequencyP = 7;
+        this.plantNormalWateringFrequencyP = 7;
     }
 
     // Všechny přístupové metody
@@ -46,9 +46,9 @@ public class Plant {
     public void setPlantLastWateringDateP(LocalDate plantLastWateringDateP) {
         this.plantLastWateringDateP = plantLastWateringDateP;
     }
-    public int getNormalWateringFrequencyP() {return normalWateringFrequencyP;}
-    public void setNormalWateringFrequencyP(int normalWateringFrequencyP) {
-        this.normalWateringFrequencyP = normalWateringFrequencyP;
+    public int getPlantNormalWateringFrequencyP() {return plantNormalWateringFrequencyP;}
+    public void setPlantNormalWateringFrequencyP(int plantNormalWateringFrequencyP) {
+        this.plantNormalWateringFrequencyP = plantNormalWateringFrequencyP;
     }
 
     // Přístupová metoda z bodu č.4 domácího úkolu lekce 5
@@ -56,7 +56,7 @@ public class Plant {
         return "   Název rostliny: " + plantNameP + "   Datum poslední zálivky: "
                 + plantLastWateringDateP.format(DateTimeFormatter.ofPattern("d.M.yyyy"))
                 + "   Datum doporučené další zálivky: "
-                + plantLastWateringDateP.plusDays(normalWateringFrequencyP)
+                + plantLastWateringDateP.plusDays(plantNormalWateringFrequencyP)
                 .format(DateTimeFormatter.ofPattern("d.M.yyyy"));
     }
 
