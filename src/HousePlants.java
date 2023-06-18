@@ -51,7 +51,15 @@ public class HousePlants {
                     + plant.getPlantPlantingDateP());
         }
 
-
+        plantListPM.removeIf(plant -> plant.getPlantNameP().equals("Sukulent v koupelně"));
+        System.out.println();
+        System.out.println
+                ("Aktualizovaný seznam rostlin po odebrání jedné rostliny dle zadání domácího úkolu v bodě 14:");
+        for (Plant plant : plantListPM) {
+            System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
+                    + plant.getPlantNormalWateringFrequencyP() + "\t" + plant.getPlantLastWateringDateP() + "\t"
+                    + plant.getPlantPlantingDateP());
+        }
 
 
     }
