@@ -20,32 +20,11 @@ public class PlantManager {
     String plantNamePM = ""; String plantNotePM = "";
     int plantNormalWateringFrequencyPM = 0;
     LocalDate plantLastWateringDatePM = null; LocalDate plantPlantingDatePM = null;
+
     private List<Plant> plantListPM = new ArrayList<>();
-    public PlantManager() {this.plantListPM = new ArrayList<>();}
 
-    // Předání listu plantListPM tak, aby ho nikdo zvenčí nemohl měnit
+    // Předání kopie seznamu tak, aby ho nikdo zvenčí nemohl nikdo měnit (přikázal lektor Martin)
     public List<Plant> getPlantListPM() {return new ArrayList<>(plantListPM);}
-
-    public String getPlantInfoPrimaryLoadedDataPM (Plant plant) {
-        plantNamePM = plant.getPlantNameP();
-        plantNotePM = plant.getPlantNoteP();
-        plantNormalWateringFrequencyPM = plant.getPlantNormalWateringFrequencyP();
-        plantLastWateringDatePM
-                = LocalDate.parse(plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
-        plantPlantingDatePM
-                = LocalDate.parse(plant.getPlantPlantingDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
-        return plantNamePM + "   " + plantNotePM + "   " + plantNormalWateringFrequencyPM + "   " + plantLastWateringDatePM
-                + "   " + plantPlantingDatePM;
-    }
-
-    public List<String> getListPlantPrimaryLoadedDataPM() {
-        List<String> listPlantInfoPrimaryLoadedDataPM = new ArrayList<>();
-        for (Plant plant: plantListPM) {
-            String plantInfoPrimaryLoadedDataPM = getPlantInfoPrimaryLoadedDataPM(plant);
-            listPlantInfoPrimaryLoadedDataPM.add(plantInfoPrimaryLoadedDataPM);
-        }
-        return listPlantInfoPrimaryLoadedDataPM;
-    }
 
     public void addPlantPM(Plant plant) {plantListPM.add(plant);}
     public void removePlantPM(Plant plant) {plantListPM.remove(plant);}
