@@ -3,6 +3,7 @@ import com.domaciukollekce5.houseplants.PlantException;
 import com.domaciukollekce5.houseplants.PlantManager;
 import com.domaciukollekce5.houseplants.Settings;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -37,6 +38,21 @@ public class HousePlants {
                     + "   Datum posledního zalítí rostlinky: "
                     + plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
         }
+
+        plantListPM.add(new Plant("Jahodník", "na zábradlí balkónu", LocalDate.now(), LocalDate.now(),
+                3));
+        plantListPM.add(new Plant("Mochíto Máta", "na balkóně", LocalDate.now(), LocalDate.now(),
+                2));
+        System.out.println();
+        System.out.println("Aktualizovaný seznam rostlin po přidání dvou rostlin dle zadání domácího úkolu v bodě 14:");
+        for (Plant plant : plantListPM) {
+            System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
+                    + plant.getPlantNormalWateringFrequencyP() + "\t" + plant.getPlantLastWateringDateP() + "\t"
+                    + plant.getPlantPlantingDateP());
+        }
+
+
+
 
     }
 }

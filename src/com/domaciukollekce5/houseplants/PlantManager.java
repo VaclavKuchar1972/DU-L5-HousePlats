@@ -73,7 +73,5 @@ public class PlantManager {
             throw new PlantException("Chyba - v databázi není datum: " + itemsPM[3] + " nebo " + itemsPM[4]
                     + " na řádku: " + helpLineNumberPM + ": " + linePM);
         }
-
     }
-
 }
