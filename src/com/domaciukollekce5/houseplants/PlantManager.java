@@ -48,13 +48,18 @@ public class PlantManager {
                 plantNamePM = itemsPM[0];
                 plantNotePM = itemsPM[1];
                 plantNormalWateringFrequencyPM = Integer.parseInt(itemsPM[2]);
-                // Oštření zadávání frekvence zálivky dle bodu 6 domácího úkolu
+                // Ošetření zadávání frekvence zálivky dle bodu 6 domácího úkolu
                 if (plantNormalWateringFrequencyPM < 1) {
                     throw new PlantException("Chyba - frekvence zálivky je menší než jeden: " + itemsPM[2]
                             + " na řádku: " + helpLineNumberPM + ": " + linePM);
                 }
                 plantLastWateringDatePM = LocalDate.parse(itemsPM[3]);
                 plantPlantingDatePM = LocalDate.parse(itemsPM[4]);
+                // Ošetření zadávání data poslední zálivky dle bodu 7 domácího úkolu
+                if (plantLastWateringDatePM.isBefore(plantPlantingDatePM)) {
+                    throw new PlantException("Chyba - datum poslední zálivky je před vysazením rostliny: "
+                            + itemsPM[3] + " a " + itemsPM[4] + " na řádku: " + helpLineNumberPM + ": " + linePM);
+                }
                 Plant newPlantPM = new Plant(plantNamePM, plantNotePM, plantPlantingDatePM, plantLastWateringDatePM,
                         plantNormalWateringFrequencyPM);
                 plantListPM.add(newPlantPM);
