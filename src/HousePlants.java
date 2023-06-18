@@ -3,6 +3,7 @@ import com.domaciukollekce5.houseplants.PlantException;
 import com.domaciukollekce5.houseplants.PlantManager;
 import com.domaciukollekce5.houseplants.Settings;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class HousePlants {
@@ -26,6 +27,15 @@ public class HousePlants {
             System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
                     + plant.getPlantNormalWateringFrequencyP() + "\t" + plant.getPlantLastWateringDateP() + "\t"
                     + plant.getPlantPlantingDateP());
+        }
+
+        System.out.println();
+        System.out.println("Informace o zálivce dle zadání domácího úkolu v bodě 13:");
+        for (Plant plant : plantListPM) {
+            System.out.println("    Jméno rostliny: " + plant.getPlantNameP()
+                    + "   Standardní frekvence zalévání ve dnech: " + plant.getPlantNormalWateringFrequencyP()
+                    + "   Datum posledního zalítí rostlinky: "
+                    + plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
         }
 
     }
