@@ -45,25 +45,15 @@ public class HousePlants {
                 2));
         System.out.println();
         System.out.println("Aktualizovaný seznam rostlin po přidání dvou rostlin dle zadání domácího úkolu v bodě 14:");
-        for (Plant plant : plantListPM) {
-            System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
-                    + plant.getPlantNormalWateringFrequencyP() + "\t"
-                    + plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")) + "\t"
-                    + plant.getPlantPlantingDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
-        }
+        for (Plant plant : plantListPM) {Settings.printPlantDetails(plant);}
 
         plantListPM.removeIf(plant -> plant.getPlantNameP().equals("Sukulent v koupelně"));
         System.out.println();
         System.out.println
                 ("Aktualizovaný seznam rostlin po odebrání jedné rostliny dle zadání domácího úkolu v bodě 14:");
-        for (Plant plant : plantListPM) {
-            System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
-                    + plant.getPlantNormalWateringFrequencyP() + "\t"
-                    + plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")) + "\t"
-                    + plant.getPlantPlantingDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
-        }
+        for (Plant plant : plantListPM) {Settings.printPlantDetails(plant);}
 
-        // Uložení aktualizovaného seznamu rostlin do nového souboru dle bodu 15 domácího úkolu
+        // Uložení aktualizovaného seznamu rostlin do nového souboru dle bodu 15 domácího úkolu 1.část
         System.out.println();
         try {
             plantManager.saveDataPlantsToNewFilePM(Settings.fileNameAfterChangesS(), plantListPM);
