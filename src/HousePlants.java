@@ -12,7 +12,7 @@ public class HousePlants {
 
         PlantManager plantManager = new PlantManager();
 
-        try {plantManager.loadDataPlantsFromFilePM(Settings.fileNameS(), Settings.delimiterS());}
+        try {plantManager.loadDataPlantsFromFilePM(Settings.fileNamePrimaryS(), Settings.delimiterS());}
         catch (PlantException e) {
             System.err.println("Nepodařilo se načíst data ze souboru " + e.getLocalizedMessage());
             throw new RuntimeException(e);
@@ -23,7 +23,7 @@ public class HousePlants {
         List<Plant> plantListPM = plantManager.getPlantListPM();
 
         System.out.println();
-        System.out.println("Surová data ze vstupního souboru DB-ListOfPlants.txt:");
+        System.out.println("Surová data ze vstupního souboru DB-ListOfPlantsPrimary.txt:");
         for (Plant plant : plantListPM) {
             System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
                     + plant.getPlantNormalWateringFrequencyP() + "\t" + plant.getPlantLastWateringDateP() + "\t"
@@ -63,10 +63,16 @@ public class HousePlants {
                     + plant.getPlantPlantingDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
         }
 
-
-
+        // Uložení aktualizovaného seznamu rostlin do nového souboru dle bodu 15 domácího úkolu
+        System.out.println();
+        try {
+            plantManager.saveDataPlantsToNewFilePM(Settings.fileNameAfterChangesS(), plantListPM);
+            System.out.println("Aktualizovaný seznam rostlin byl uložen do souboru: " + Settings.fileNameAfterChangesS());
+        } catch (PlantException e) {
+            System.err.println("Chyba při ukládání dat: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
 
     }
-
 
 }

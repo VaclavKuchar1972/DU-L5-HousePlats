@@ -1,10 +1,7 @@
 package com.domaciukollekce5.houseplants;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +30,9 @@ public class PlantManager {
     // a odmažu to int ze závorek níže, proč to nefachá? Co to má být?
     public Plant getPlantFromIdexPM(int indexPM) {return plantListPM.get(indexPM);}
 
-    public void loadDataPlantsFromFilePM (String fileNamePM, String delimiterPM) throws PlantException {
+    public void loadDataPlantsFromFilePM (String fileNamePrimaryPM, String delimiterPM) throws PlantException {
         helpLineNumberPM = 0; linePM = "";
-        try (Scanner scannerLoadDataPM = new Scanner(new BufferedReader(new FileReader(fileNamePM)))) {
+        try (Scanner scannerLoadDataPM = new Scanner(new BufferedReader(new FileReader(fileNamePrimaryPM)))) {
             while (scannerLoadDataPM.hasNextLine()) {
                 helpLineNumberPM = helpLineNumberPM + 1;
                 linePM = scannerLoadDataPM.nextLine();
@@ -65,7 +62,7 @@ public class PlantManager {
                 plantListPM.add(newPlantPM);
             }
         } catch (FileNotFoundException e) {
-            throw new PlantException("Soubor " + fileNamePM + "nebyl nalezen! " + e.getLocalizedMessage());
+            throw new PlantException("Soubor " + fileNamePrimaryPM + "nebyl nalezen! " + e.getLocalizedMessage());
         } catch (NumberFormatException e) {
             throw new PlantException("Chyba - v databázi není číslo: " + itemsPM[2]
                     + " na řádku: " + helpLineNumberPM + ": " + linePM);
@@ -74,4 +71,18 @@ public class PlantManager {
                     + " na řádku: " + helpLineNumberPM + ": " + linePM);
         }
     }
+    public void saveDataPlantsToNewFilePM(String fileName, List<Plant> plantList) throws PlantException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (Plant plant : plantList) {
+                writer.write(plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
+                        + plant.getPlantNormalWateringFrequencyP() + "\t"
+                        + plant.getPlantLastWateringDateP() + "\t"
+                        + plant.getPlantPlantingDateP());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            throw new PlantException("Chyba při ukládání dat do souboru: " + e.getMessage());
+        }
+    }
+
 }
