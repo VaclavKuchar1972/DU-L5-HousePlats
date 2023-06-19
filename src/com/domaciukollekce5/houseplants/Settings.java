@@ -7,11 +7,17 @@ public class Settings {
     public static String fileNameAfterChangesS() {return "DB-ListOfPlantsAfterChanges.txt";}
     public static String delimiterS () {return "\t";}
 
-    public static void printPlantDetails(Plant plant) {
+    public static void printPlantsPeopleDateOutput(Plant plant) {
         System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
                 + plant.getPlantNormalWateringFrequencyP() + "\t"
                 + plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")) + "\t"
                 + plant.getPlantPlantingDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
+    }
+
+    public static void printPlantsComputerOutput(Plant plant) {
+        System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
+                + plant.getPlantNormalWateringFrequencyP() + "\t" + plant.getPlantLastWateringDateP() + "\t"
+                + plant.getPlantPlantingDateP());
     }
 
 }

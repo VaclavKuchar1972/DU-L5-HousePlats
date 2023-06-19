@@ -23,45 +23,55 @@ public class HousePlants {
         List<Plant> plantListPM = plantManager.getPlantListPM();
 
         System.out.println();
-        System.out.println("Surová data ze vstupního souboru DB-ListOfPlantsPrimary.txt:");
-        for (Plant plant : plantListPM) {
-            System.out.println("\t" + plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
-                    + plant.getPlantNormalWateringFrequencyP() + "\t" + plant.getPlantLastWateringDateP() + "\t"
-                    + plant.getPlantPlantingDateP());
-        }
+        System.out.println("Surová data ze VSTUPNÍHO souboru DB-ListOfPlantsPrimary.txt:");
+        for (Plant plant : plantListPM) {Settings.printPlantsComputerOutput(plant);}
 
         System.out.println();
         System.out.println("Informace o zálivce dle zadání domácího úkolu v bodě 13:");
-        for (Plant plant : plantListPM) {
-            System.out.println("    Jméno rostliny: " + plant.getPlantNameP()
-                    + "   Standardní frekvence zalévání ve dnech: " + plant.getPlantNormalWateringFrequencyP()
-                    + "   Datum posledního zalítí rostlinky: "
-                    + plant.getPlantLastWateringDateP().format(DateTimeFormatter.ofPattern("d.M.yyyy")));
-        }
+        for (Plant plant : plantListPM) {Settings.printPlantsComputerOutput(plant);}
 
-        plantListPM.add(new Plant("Jahodník", "na zábradlí balkónu", LocalDate.now(), LocalDate.now(),
+        plantListPM.add(new Plant("Jahodník", "na zábradlí balkónu", LocalDate.now(),
+                LocalDate.now(),
                 3));
         plantListPM.add(new Plant("Mochíto Máta", "na balkóně", LocalDate.now(), LocalDate.now(),
                 2));
         System.out.println();
         System.out.println("Aktualizovaný seznam rostlin po přidání dvou rostlin dle zadání domácího úkolu v bodě 14:");
-        for (Plant plant : plantListPM) {Settings.printPlantDetails(plant);}
+        // Tady a níže se mi teda vůbec nelíbí, že se mi tam zbytečně znovu opakuje to for atd. a že to nešlo celé
+        // do těch Settings a zavolat jedním slovem, jako statická položka (subrutina VBasic, ale dobrý
+        // - možná již si to nepamatuji přesně), ale v tý kalkulačce v JavaFX jsem si takový věci dělal jak
+        // na běžícím pásu, ale ano, v té samé třídě, i když to tady ale evidentně stejně moc nejde... :D ...nebo blbě
+        // a na experimenty v tom mým časovým skluzu nemám čas. :-( ALE super!, lekce 7 a Statická proměnná/položka?/
+        // metoda? (objěkt) - Super - moc líbí, líbí!! :-)
+        for (Plant plant : plantListPM) {Settings.printPlantsPeopleDateOutput(plant);}
 
         plantListPM.removeIf(plant -> plant.getPlantNameP().equals("Sukulent v koupelně"));
         System.out.println();
         System.out.println
                 ("Aktualizovaný seznam rostlin po odebrání jedné rostliny dle zadání domácího úkolu v bodě 14:");
-        for (Plant plant : plantListPM) {Settings.printPlantDetails(plant);}
+        for (Plant plant : plantListPM) {Settings.printPlantsPeopleDateOutput(plant);}
 
-        // Uložení aktualizovaného seznamu rostlin do nového souboru dle bodu 15 domácího úkolu 1.část
+        // Uložení aktualizovaného seznamu rostlin do nového souboru dle bodu 15 domácího úkolu
         System.out.println();
         try {
             plantManager.saveDataPlantsToNewFilePM(Settings.fileNameAfterChangesS(), plantListPM);
-            System.out.println("Aktualizovaný seznam rostlin byl uložen do souboru: " + Settings.fileNameAfterChangesS());
+            System.out.println("Aktualizovaný seznam rostlin byl uložen do souboru: "
+                    + Settings.fileNameAfterChangesS());
         } catch (PlantException e) {
             System.err.println("Chyba při ukládání dat: " + e.getMessage());
             throw new RuntimeException(e);
         }
+
+        // Naačtení ze souboru a vizuální ověření souboru aktualizovaného seznamu rostlin do nového souboru dle bodu
+        // 16 domácího úkolu + vizuální ověření na výstupu na obrazovku
+        try {plantManager.loadDataPlantsFromFilePM(Settings.fileNameAfterChangesS(), Settings.delimiterS());}
+        catch (PlantException e) {
+            System.err.println("Nepodařilo se načíst data ze souboru " + e.getLocalizedMessage());
+            throw new RuntimeException(e);
+        }
+        System.out.println();
+        System.out.println("Surová data z VÝSTUPNÍHO souboru DB-ListOfPlantsAfterChanges.txt:");
+        for (Plant plant : plantListPM) {Settings.printPlantsComputerOutput(plant);}
 
     }
 
