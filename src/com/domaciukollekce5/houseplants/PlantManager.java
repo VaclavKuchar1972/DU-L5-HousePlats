@@ -44,10 +44,10 @@ public class PlantManager {
                 plantPlantingDatePM = LocalDate.parse(itemsPM[4]);
 
                 // Ošetření zadávání data poslední zálivky dle bodu 7 domácího úkolu
-                if (plantLastWateringDatePM.isBefore(plantPlantingDatePM)) {
-                    throw new PlantException("Chyba - datum poslední zálivky je před vysazením rostliny: "
-                            + itemsPM[3] + " a " + itemsPM[4] + " na řádku: " + helpLineNumberPM + ": " + linePM);
-                }
+                //if (plantLastWateringDatePM.isBefore(plantPlantingDatePM)) {
+                //    throw new PlantException("Chyba - datum poslední zálivky je před vysazením rostliny: "
+                //            + itemsPM[3] + " a " + itemsPM[4] + " na řádku: " + helpLineNumberPM + ": " + linePM);
+                //}
 
 
 

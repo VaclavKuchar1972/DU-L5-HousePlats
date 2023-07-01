@@ -17,7 +17,7 @@ public class Plant {
         this.plantNameP = plantNameP;
         this.plantNoteP = plantNoteP;
         this.plantPlantingDateP = plantPlantingDateP;
-        this.plantLastWateringDateP = plantLastWateringDateP;
+        this.setPlantLastWateringDateP(plantLastWateringDateP);
         this.setPlantNormalWateringFrequencyP(plantNormalWateringFrequencyP);
     }
     // Konstruktor 2 - "plantNoteP" nastaví jako prázdný řetězec a "plantLastWateringDateP" nastaví jako aktuální datum
@@ -56,13 +56,18 @@ public class Plant {
     public LocalDate getPlantPlantingDateP() {return plantPlantingDateP;}
     public void setPlantPlantingDateP(LocalDate plantPlantingDateP) {this.plantPlantingDateP = plantPlantingDateP;}
     public LocalDate getPlantLastWateringDateP() {return plantLastWateringDateP;}
-    public void setPlantLastWateringDateP(LocalDate plantLastWateringDateP) {
+    public void setPlantLastWateringDateP(LocalDate plantLastWateringDateP) throws PlantException {
+        // Ošetření zadávání data poslední zálivky dle bodu 7 domácího úkolu - 1. část řešení,
+        // 2. část je v jednom konstrukotoru a třetí část je v Mainu
+        if (plantLastWateringDateP.isBefore(plantPlantingDateP)) {
+            throw new PlantException("Chyba - datum poslední zálivky je před vysazením rostliny");
+        }
         this.plantLastWateringDateP = plantLastWateringDateP;
     }
     public int getPlantNormalWateringFrequencyP() {return plantNormalWateringFrequencyP;}
     public void setPlantNormalWateringFrequencyP(int plantNormalWateringFrequencyP) throws PlantException {
-        // Ošetření zadávání frekvence zálivky dle bodu 6 domácího úkolu - 1. část řešení, 2. část je v konstrukotorech
-        // a třetí část je v Mainu
+        // Ošetření zadávání frekvence zálivky dle bodu 6 domácího úkolu - 1. část řešení, 2. část je ve dvou
+        // konstrukotorech a třetí část je v Mainu
         if (plantNormalWateringFrequencyP < 1) {
             throw new PlantException("Chyba - frekvence zálivky je menší než jeden den, její hodnota je nyní: "
                     + plantNormalWateringFrequencyP);

@@ -30,32 +30,24 @@ public class HousePlants {
         System.out.println("Informace o zálivce dle zadání domácího úkolu v bodě 13:");
         for (Plant plant : plantListPM) {Settings.printPlantsComputerOutput(plant);}
 
-        // Ošetření zadávání frekvence zálivky dle bodu 6 domácího úkolu (3. část) + část bodu 14 (přidání dvou květin)
+
+        // Ošetření zadávání frekvence zálivky dle bodu 6 domácího úkolu (3. část)
+        // + Ošetření zadávání datumu zálivky dle bodu 7 domácího úkolu (3. část)
+        // + část bodu 14 (přidání dvou květin)
         try {
             plantListPM.add(new Plant("Jahodník", "na zábradlí balkónu", LocalDate.now(),
                     LocalDate.now(),
                     3));
-            plantListPM.add(new Plant("Mochíto Máta", "na balkóně", LocalDate.now(), LocalDate.now(),
-                    2));
+            plantListPM.add(new Plant("Mochíto Máta", "na balkóně", LocalDate.now(),
+                    LocalDate.now(), 2));
         }
         catch (PlantException e) {
             System.err.print("Nastala chyba při vytváření nových rostlin" + e.getLocalizedMessage());
         }
 
 
-
         System.out.println();
         System.out.println("Aktualizovaný seznam rostlin po přidání dvou rostlin dle zadání domácího úkolu v bodě 14:");
-
-
-
-
-        // Tady a níže se mi teda vůbec nelíbí, že se mi tam zbytečně znovu opakuje to for atd. a že to nešlo celé
-        // do těch Settings a zavolat jedním slovem, jako statická položka (subrutina VBasic, ale dobrý
-        // - možná již si to nepamatuji přesně), ale v tý kalkulačce v JavaFX jsem si takový věci dělal jak
-        // na běžícím pásu, ale ano, v té samé třídě, i když to tady ale evidentně stejně moc nejde... :D ...nebo blbě
-        // a na experimenty v tom mým časovým skluzu nemám čas. :-( ALE super!, lekce 7 a Statická proměnná/položka?/
-        // metoda? (objěkt) - Super - moc líbí, líbí!! :-)
         for (Plant plant : plantListPM) {Settings.printPlantsPeopleDateOutput(plant);}
 
         plantListPM.removeIf(plant -> plant.getPlantNameP().equals("Sukulent v koupelně"));
