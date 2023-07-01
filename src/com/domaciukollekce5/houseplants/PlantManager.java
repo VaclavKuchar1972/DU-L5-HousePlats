@@ -23,7 +23,8 @@ public class PlantManager {
     public Plant getPlantFromIdexPM(int indexPM) {return plantListPM.get(indexPM);}
 
     public void loadDataPlantsFromFilePM (String fileNamePrimaryPM, String delimiterPM) throws PlantException {
-        int helpLineNumberPM = 0; int plantNormalWateringFrequencyPM = 0;
+        int helpLineNumberPM = 0; int helpBadDateIdentifokatorPM = 3;
+        int plantNormalWateringFrequencyPM = 0;
         String linePM = ""; String plantNamePM = ""; String plantNotePM = "";
         String[] itemsPM = new String[0];
         LocalDate plantLastWateringDatePM = null; LocalDate plantPlantingDatePM = null;
@@ -41,16 +42,14 @@ public class PlantManager {
                 plantNotePM = itemsPM[1];
                 plantNormalWateringFrequencyPM = Integer.parseInt(itemsPM[2]);
                 plantLastWateringDatePM = LocalDate.parse(itemsPM[3]);
+                // Toto ošetření nad rámec domácího úkolu jsem si po konzultaci,
+                // kde jsem zase otravoval nejvíc ze všech, nemohl odpustit... ...to bych Tě urazil. :-)
+                // Funguje to teda nějak divně!!! :D ten výpis chyby jsem nepochopil, ALE funguje dostatečně na to,
+                // aby frajer (specialista), kterýmu to tuto chybu zahlásí, věděl ihned, kde je problém
+                // jestli budeme mít spolu nějakou další konzultaci, tak Tě ohleděně tohoto opět vyslechnu :-)
+                helpBadDateIdentifokatorPM = 4;
+
                 plantPlantingDatePM = LocalDate.parse(itemsPM[4]);
-
-                // Ošetření zadávání data poslední zálivky dle bodu 7 domácího úkolu
-                //if (plantLastWateringDatePM.isBefore(plantPlantingDatePM)) {
-                //    throw new PlantException("Chyba - datum poslední zálivky je před vysazením rostliny: "
-                //            + itemsPM[3] + " a " + itemsPM[4] + " na řádku: " + helpLineNumberPM + ": " + linePM);
-                //}
-
-
-
                 Plant newPlantPM = new Plant(plantNamePM, plantNotePM, plantPlantingDatePM, plantLastWateringDatePM,
                         plantNormalWateringFrequencyPM);
                 plantListPM.add(newPlantPM);
@@ -61,7 +60,7 @@ public class PlantManager {
             throw new PlantException("Chyba - v databázi není číslo: " + itemsPM[2]
                     + " na řádku: " + helpLineNumberPM + ": " + linePM);
         } catch (DateTimeParseException e) {
-            throw new PlantException("Chyba - v databázi není datum: " + itemsPM[3] + " nebo " + itemsPM[4]
+            throw new PlantException("Chyba - v databázi není datum: " + itemsPM[helpBadDateIdentifokatorPM]
                     + " na řádku: " + helpLineNumberPM + ": " + linePM);
         }
     }
