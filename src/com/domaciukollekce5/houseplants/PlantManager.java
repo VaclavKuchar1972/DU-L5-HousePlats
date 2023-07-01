@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.domaciukollekce5.houseplants.Settings.delimiterS;
+
 public class PlantManager {
     // POMOCNÝ PROMĚNNÝ JIŽ NIKDY NEAKTIVOVAT NA ZAĆÁTKU PROGRAMU nebo Třídy!!!
     // Jejich aktivace (alokace v paměti) patří přímo do dané metody, kde je budu potřebovat, protože po skončení metody
@@ -42,6 +44,7 @@ public class PlantManager {
                 plantNotePM = itemsPM[1];
                 plantNormalWateringFrequencyPM = Integer.parseInt(itemsPM[2]);
                 plantLastWateringDatePM = LocalDate.parse(itemsPM[3]);
+
                 // Toto ošetření nad rámec domácího úkolu jsem si po konzultaci,
                 // kde jsem zase otravoval nejvíc ze všech, nemohl odpustit... ...to bych Tě urazil. :-)
                 // Funguje to teda nějak divně!!! :D ten výpis chyby jsem nepochopil, ALE funguje dostatečně na to,
@@ -67,9 +70,9 @@ public class PlantManager {
     public void saveDataPlantsToNewFilePM(String fileName, List<Plant> plantList) throws PlantException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (Plant plant : plantList) {
-                writer.write(plant.getPlantNameP() + "\t" + plant.getPlantNoteP() + "\t"
-                        + plant.getPlantNormalWateringFrequencyP() + "\t"
-                        + plant.getPlantLastWateringDateP() + "\t"
+                writer.write(plant.getPlantNameP() + delimiterS () + plant.getPlantNoteP() + delimiterS ()
+                        + plant.getPlantNormalWateringFrequencyP() + delimiterS ()
+                        + plant.getPlantLastWateringDateP() + delimiterS ()
                         + plant.getPlantPlantingDateP());
                 writer.newLine();
             }

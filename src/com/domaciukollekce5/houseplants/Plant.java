@@ -11,6 +11,12 @@ public class Plant {
     private LocalDate plantLastWateringDateP;
     private int plantNormalWateringFrequencyP;
 
+
+    // Tady vůbec nevím jestli mám správně ty konstruktory!!! ALE fachá to správně. ???
+    // Jak to, že to funguje, když je v těch závorkách, řádek 30 a 39 nemám všechny - ty položky???
+    // Jak to, že, když je tam doplním všechny, tak to celý zčervená???
+    // Jsem naprosto mimo mísu... :-(
+
     // Konstruktor 1 - se všemi adtibuty
     public Plant(String plantNameP, String plantNoteP, LocalDate plantPlantingDateP, LocalDate plantLastWateringDateP,
                  int plantNormalWateringFrequencyP) throws PlantException {
