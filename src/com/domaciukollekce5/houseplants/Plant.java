@@ -13,25 +13,25 @@ public class Plant {
 
     // Konstruktor 1 - se všemi adtibuty
     public Plant(String plantNameP, String plantNoteP, LocalDate plantPlantingDateP, LocalDate plantLastWateringDateP,
-                 int plantNormalWateringFrequencyP) {
+                 int plantNormalWateringFrequencyP) throws PlantException {
         this.plantNameP = plantNameP;
         this.plantNoteP = plantNoteP;
         this.plantPlantingDateP = plantPlantingDateP;
         this.plantLastWateringDateP = plantLastWateringDateP;
-        this.plantNormalWateringFrequencyP = plantNormalWateringFrequencyP;
+        this.setPlantNormalWateringFrequencyP(plantNormalWateringFrequencyP);
     }
     // Konstruktor 2 - "plantNoteP" nastaví jako prázdný řetězec a "plantLastWateringDateP" nastaví jako aktuální datum
-    public Plant(String plantNoteP, LocalDate plantLastWateringDateP) {
+    public Plant(String plantNoteP, LocalDate plantLastWateringDateP) throws PlantException {
         this.plantNameP = plantNameP;
         this.plantNoteP = "";
         this.plantPlantingDateP = plantPlantingDateP;
         this.plantLastWateringDateP = LocalDate.now();
-        this.plantNormalWateringFrequencyP = plantNormalWateringFrequencyP;
+        this.setPlantNormalWateringFrequencyP(plantNormalWateringFrequencyP);
     }
     // Konstruktor 3 - "plantNoteP" nastaví jako prázdný řetězec, "plantLastWateringDateP" nastaví jako aktuální datum,
     // "normalWateringFrequencyP" nastaví na hodnotu 7 a "plantPlantingDateP" nastaví jako aktuální datum
     public Plant(String plantNoteP, LocalDate plantPlantingDateP, LocalDate plantLastWateringDateP,
-                 int plantNormalWateringFrequencyP) {
+                 int plantNormalWateringFrequencyP) throws PlantException {
         this.plantNameP = plantNameP;
         this.plantNoteP = "";
         this.plantPlantingDateP = LocalDate.now();
@@ -60,7 +60,13 @@ public class Plant {
         this.plantLastWateringDateP = plantLastWateringDateP;
     }
     public int getPlantNormalWateringFrequencyP() {return plantNormalWateringFrequencyP;}
-    public void setPlantNormalWateringFrequencyP(int plantNormalWateringFrequencyP) {
+    public void setPlantNormalWateringFrequencyP(int plantNormalWateringFrequencyP) throws PlantException {
+        // Ošetření zadávání frekvence zálivky dle bodu 6 domácího úkolu - 1. část řešení, 2. část je v konstrukotorech
+        // a třetí část je v Mainu
+        if (plantNormalWateringFrequencyP < 1) {
+            throw new PlantException("Chyba - frekvence zálivky je menší než jeden den, její hodnota je nyní: "
+                    + plantNormalWateringFrequencyP);
+        }
         this.plantNormalWateringFrequencyP = plantNormalWateringFrequencyP;
     }
 

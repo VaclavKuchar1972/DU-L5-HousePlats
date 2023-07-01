@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PlantManager {
-    // POMOCNÝ PROMĚNNÝ JIŽ NIKDY NEAKTIVOVAT NA ZAĆÁTKU PROGRAMU!!!
+    // POMOCNÝ PROMĚNNÝ JIŽ NIKDY NEAKTIVOVAT NA ZAĆÁTKU PROGRAMU nebo Třídy!!!
     // Jejich aktivace (alokace v paměti) patří přímo do dané metody, kde je budu potřebovat, protože po skončení metody
-    // se z paměti ihned uvolní.
+    // se z paměti ihned uvolní. (to je pro mě)
 
     private List<Plant> plantListPM = new ArrayList<>();
 
@@ -23,9 +23,9 @@ public class PlantManager {
     public Plant getPlantFromIdexPM(int indexPM) {return plantListPM.get(indexPM);}
 
     public void loadDataPlantsFromFilePM (String fileNamePrimaryPM, String delimiterPM) throws PlantException {
-        String[] itemsPM = new String[0]; int helpLineNumberPM = 0; String linePM = "";
-        String plantNamePM = ""; String plantNotePM = "";
-        int plantNormalWateringFrequencyPM = 0;
+        int helpLineNumberPM = 0; int plantNormalWateringFrequencyPM = 0;
+        String linePM = ""; String plantNamePM = ""; String plantNotePM = "";
+        String[] itemsPM = new String[0];
         LocalDate plantLastWateringDatePM = null; LocalDate plantPlantingDatePM = null;
         try (Scanner scannerLoadDataPM = new Scanner(new BufferedReader(new FileReader(fileNamePrimaryPM)))) {
             while (scannerLoadDataPM.hasNextLine()) {
@@ -40,11 +40,6 @@ public class PlantManager {
                 plantNamePM = itemsPM[0];
                 plantNotePM = itemsPM[1];
                 plantNormalWateringFrequencyPM = Integer.parseInt(itemsPM[2]);
-                // Ošetření zadávání frekvence zálivky dle bodu 6 domácího úkolu
-                if (plantNormalWateringFrequencyPM < 1) {
-                    throw new PlantException("Chyba - frekvence zálivky je menší než jeden: " + itemsPM[2]
-                            + " na řádku: " + helpLineNumberPM + ": " + linePM);
-                }
                 plantLastWateringDatePM = LocalDate.parse(itemsPM[3]);
                 plantPlantingDatePM = LocalDate.parse(itemsPM[4]);
 
@@ -53,6 +48,8 @@ public class PlantManager {
                     throw new PlantException("Chyba - datum poslední zálivky je před vysazením rostliny: "
                             + itemsPM[3] + " a " + itemsPM[4] + " na řádku: " + helpLineNumberPM + ": " + linePM);
                 }
+
+
 
                 Plant newPlantPM = new Plant(plantNamePM, plantNotePM, plantPlantingDatePM, plantLastWateringDatePM,
                         plantNormalWateringFrequencyPM);

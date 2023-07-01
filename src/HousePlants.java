@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class HousePlants {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PlantException {
 
         PlantManager plantManager = new PlantManager();
 
@@ -30,13 +30,26 @@ public class HousePlants {
         System.out.println("Informace o zálivce dle zadání domácího úkolu v bodě 13:");
         for (Plant plant : plantListPM) {Settings.printPlantsComputerOutput(plant);}
 
-        plantListPM.add(new Plant("Jahodník", "na zábradlí balkónu", LocalDate.now(),
-                LocalDate.now(),
-                3));
-        plantListPM.add(new Plant("Mochíto Máta", "na balkóně", LocalDate.now(), LocalDate.now(),
-                2));
+        // Ošetření zadávání frekvence zálivky dle bodu 6 domácího úkolu (3. část) + část bodu 14 (přidání dvou květin)
+        try {
+            plantListPM.add(new Plant("Jahodník", "na zábradlí balkónu", LocalDate.now(),
+                    LocalDate.now(),
+                    3));
+            plantListPM.add(new Plant("Mochíto Máta", "na balkóně", LocalDate.now(), LocalDate.now(),
+                    2));
+        }
+        catch (PlantException e) {
+            System.err.print("Nastala chyba při vytváření nových rostlin" + e.getLocalizedMessage());
+        }
+
+
+
         System.out.println();
         System.out.println("Aktualizovaný seznam rostlin po přidání dvou rostlin dle zadání domácího úkolu v bodě 14:");
+
+
+
+
         // Tady a níže se mi teda vůbec nelíbí, že se mi tam zbytečně znovu opakuje to for atd. a že to nešlo celé
         // do těch Settings a zavolat jedním slovem, jako statická položka (subrutina VBasic, ale dobrý
         // - možná již si to nepamatuji přesně), ale v tý kalkulačce v JavaFX jsem si takový věci dělal jak
