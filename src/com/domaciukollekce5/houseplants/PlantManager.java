@@ -8,15 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PlantManager {
-    // int indexPM;
-    // String fileName;
-
-    // pomocné proměnné
-    String[] itemsPM = new String[0]; int helpLineNumberPM = 0; String linePM = "";
-
-    String plantNamePM = ""; String plantNotePM = "";
-    int plantNormalWateringFrequencyPM = 0;
-    LocalDate plantLastWateringDatePM = null; LocalDate plantPlantingDatePM = null;
+    // POMOCNÝ PROMĚNNÝ JIŽ NIKDY NEAKTIVOVAT NA ZAĆÁTKU PROGRAMU!!!
+    // Jejich aktivace (alokace v paměti) patří přímo do dané metody, kde je budu potřebovat, protože po skončení metody
+    // se z paměti ihned uvolní.
 
     private List<Plant> plantListPM = new ArrayList<>();
 
@@ -26,12 +20,13 @@ public class PlantManager {
     public void addPlantPM(Plant plant) {plantListPM.add(plant);}
     public void removePlantPM(Plant plant) {plantListPM.remove(plant);}
 
-    // Proč, když jsem si inicializoval proměnnou (atribut?) indexPM na začátku třídy tedy: "int indexPM"
-    // a odmažu to int ze závorek níže, proč to nefachá? Co to má být?
     public Plant getPlantFromIdexPM(int indexPM) {return plantListPM.get(indexPM);}
 
     public void loadDataPlantsFromFilePM (String fileNamePrimaryPM, String delimiterPM) throws PlantException {
-        helpLineNumberPM = 0; linePM = "";
+        String[] itemsPM = new String[0]; int helpLineNumberPM = 0; String linePM = "";
+        String plantNamePM = ""; String plantNotePM = "";
+        int plantNormalWateringFrequencyPM = 0;
+        LocalDate plantLastWateringDatePM = null; LocalDate plantPlantingDatePM = null;
         try (Scanner scannerLoadDataPM = new Scanner(new BufferedReader(new FileReader(fileNamePrimaryPM)))) {
             while (scannerLoadDataPM.hasNextLine()) {
                 helpLineNumberPM = helpLineNumberPM + 1;
@@ -52,11 +47,13 @@ public class PlantManager {
                 }
                 plantLastWateringDatePM = LocalDate.parse(itemsPM[3]);
                 plantPlantingDatePM = LocalDate.parse(itemsPM[4]);
+
                 // Ošetření zadávání data poslední zálivky dle bodu 7 domácího úkolu
                 if (plantLastWateringDatePM.isBefore(plantPlantingDatePM)) {
                     throw new PlantException("Chyba - datum poslední zálivky je před vysazením rostliny: "
                             + itemsPM[3] + " a " + itemsPM[4] + " na řádku: " + helpLineNumberPM + ": " + linePM);
                 }
+
                 Plant newPlantPM = new Plant(plantNamePM, plantNotePM, plantPlantingDatePM, plantLastWateringDatePM,
                         plantNormalWateringFrequencyPM);
                 plantListPM.add(newPlantPM);

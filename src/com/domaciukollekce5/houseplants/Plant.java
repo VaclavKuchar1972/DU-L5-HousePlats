@@ -22,17 +22,30 @@ public class Plant {
     }
     // Konstruktor 2 - "plantNoteP" nastaví jako prázdný řetězec a "plantLastWateringDateP" nastaví jako aktuální datum
     public Plant(String plantNoteP, LocalDate plantLastWateringDateP) {
+        this.plantNameP = plantNameP;
         this.plantNoteP = "";
+        this.plantPlantingDateP = plantPlantingDateP;
         this.plantLastWateringDateP = LocalDate.now();
+        this.plantNormalWateringFrequencyP = plantNormalWateringFrequencyP;
     }
     // Konstruktor 3 - "plantNoteP" nastaví jako prázdný řetězec, "plantLastWateringDateP" nastaví jako aktuální datum,
     // "normalWateringFrequencyP" nastaví na hodnotu 7 a "plantPlantingDateP" nastaví jako aktuální datum
     public Plant(String plantNoteP, LocalDate plantPlantingDateP, LocalDate plantLastWateringDateP,
                  int plantNormalWateringFrequencyP) {
-        this.plantNoteP = plantNoteP;
+        this.plantNameP = plantNameP;
+        this.plantNoteP = "";
         this.plantPlantingDateP = LocalDate.now();
         this.plantLastWateringDateP = LocalDate.now();
         this.plantNormalWateringFrequencyP = 7;
+    }
+
+    // Přístupová metoda z bodu č.4 domácího úkolu lekce 5
+    public String getWateringInfo () {
+        return "   Název rostliny: " + plantNameP + "   Datum poslední zálivky: "
+                + plantLastWateringDateP.format(DateTimeFormatter.ofPattern("d.M.yyyy"))
+                + "   Datum doporučené další zálivky: "
+                + plantLastWateringDateP.plusDays(plantNormalWateringFrequencyP)
+                .format(DateTimeFormatter.ofPattern("d.M.yyyy"));
     }
 
     // Všechny přístupové metody
@@ -49,15 +62,6 @@ public class Plant {
     public int getPlantNormalWateringFrequencyP() {return plantNormalWateringFrequencyP;}
     public void setPlantNormalWateringFrequencyP(int plantNormalWateringFrequencyP) {
         this.plantNormalWateringFrequencyP = plantNormalWateringFrequencyP;
-    }
-
-    // Přístupová metoda z bodu č.4 domácího úkolu lekce 5
-    public String getWateringInfo () {
-        return "   Název rostliny: " + plantNameP + "   Datum poslední zálivky: "
-                + plantLastWateringDateP.format(DateTimeFormatter.ofPattern("d.M.yyyy"))
-                + "   Datum doporučené další zálivky: "
-                + plantLastWateringDateP.plusDays(plantNormalWateringFrequencyP)
-                .format(DateTimeFormatter.ofPattern("d.M.yyyy"));
     }
 
 }
